@@ -12,7 +12,27 @@ namespace WPF1
         public string address { get; set; }
         public int zip { get; set; }
 
+        public EntryForm()
+        {
+            name = string.Empty;
+            address = string.Empty;
+            zip = 0;
+        }
+
        
 
+        public EntryForm(string Name, string Address, int zipcode )
+        {
+            Name = name;
+            Address = address;
+            zipcode = zip;
+        }
+       
+        public override string ToString()
+        {
+            return base.ToString();
+            return $"Name; {name} Address: {address} Zip: {zip}";
+        }
+        
     }
 }

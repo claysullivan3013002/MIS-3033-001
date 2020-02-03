@@ -27,6 +27,9 @@ namespace WPF1
         public MainWindow()
         {
             InitializeComponent();
+            textbox1.Text = string.Empty;
+            textbox2.Text = string.Empty;
+            textbox3.Text = string.Empty;
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -44,11 +47,30 @@ namespace WPF1
 
         private void Button1_Click(object sender, RoutedEventArgs e)
         {
-            EntryForm.name = textbox1.Text;
-            string address = textbox2.Text;
-            int zip = Convert.ToInt32(textbox3.Text);
-            listbox1.Items.Add(EntryForm);
-            listbox1.Items.Add(zip);
+            string addy = textbox1.Text;
+            string namy = textbox2.Text;
+            string zipy = textbox3.Text;
+            int zipcode;
+
+            if (string.IsNullOrWhiteSpace(addy)==true)
+            {
+                MessageBox.Show("You must enter an address");
+            }
+
+            bool isint = Int32.TryParse(zipy, out zipcode);
+            if (isint==false)
+            {
+                MessageBox.Show("must enter an integer value for zip code");
+            }
+
+            EntryForm ef = new EntryForm();
+            ef.address = addy;
+            ef.name = namy;
+            ef.zip = zipcode;
+
+            // ^^ does the same thing as above EntryForm ef = new EntryForm(namy,addy,zipcode);
+            listbox1.Items.Add(ef);
+
         }
 
         private void listbox1_SelectionChanged(object sender, SelectionChangedEventArgs e)
